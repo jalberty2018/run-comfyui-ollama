@@ -13,14 +13,6 @@ This pod downloads models as specified in the **environment variables** set in t
 Ensure that the required environment variables and secrets are correctly set before running the pod.
 See below for options.
 
-## Templates available in ComfyUI (left folder icon)
-
-![t2t simple](images/ollama-simple.JPG)
-
-![i2t simple](images/ollama-vision-simple.JPG)
-
-![i2t advanced](images/ollama-vision-advanced.JPG)
-
 ## Hardware Requirements  
  
 - **Recommended GPUs**: L4, A40
@@ -95,14 +87,41 @@ See below for options.
 
 [provisioning](provisioning/provisioning.md)
 
-## Utilites
+## Templates available in ComfyUI (left folder icon)
+
+![t2t simple](images/ollama-simple.JPG)
+
+![i2t simple](images/ollama-vision-simple.JPG)
+
+![i2t advanced](images/ollama-vision-advanced.JPG)
+
+## Building the Docker Image 
+
+This is not possible on [runpod.io](https://runpod.io?ref=se4tkc5o) use local hardware.
+You can build and push the image to Docker Hub using the `build-docker.py` script.
+
+### `build-docker.py` script options
+
+| Option         | Description                                         | Default                |
+|----------------|-----------------------------------------------------|------------------------|
+| `--username`   | Docker Hub username                                 | Current user           |
+| `--tag`        | Tag to use for the image                            | Today's date           |
+| `--latest`     | If specified, also tags and pushes as `latest`      | Not enabled by default |
+
+### Build & push Command
+
+Run the following command to clone the repository and build the image:
 
 ```bash
-nvtop
-htop
-mc
-nano
+git clone https://github.com/jalberty2018/run-comfyui-ollama.git
+
+python3 run-comfyui-ollama/build-docker.py \
+--username=<your_dockerhub_username> \
+--tag=<custom_tag> \ 
+run-comfyui-ollama
 ```
+
+Note: If you want to push the image with the latest tag, add the --latest flag at the end.
 
 
 
